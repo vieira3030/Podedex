@@ -2,7 +2,7 @@ name: Deploy Pages
 
 on:
   push:
-    branches: ["main", "dev", "aula-5"] 
+    branches: ["main", "dev", "aula-5"] // Deploy on push to main, dev, and aula-5 branches
   workflow_dispatch:
 
 permissions:
