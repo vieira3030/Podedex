@@ -1,0 +1,174 @@
+/* =========================================
+   BASE E FUNDO DINÂMICO
+========================================= */
+.master-wrapper {
+  min-height: 100vh;
+  background-color: #0f0f1b; 
+  transition: background-color 0.8s ease;
+  padding-top: 100px; 
+  padding-bottom: 50px;
+}
+
+.bg-fire { background-color: #4a1c10 !important; }
+.bg-water { background-color: #0d2b45 !important; }
+.bg-grass { background-color: #1a361a !important; }
+.bg-electric { background-color: #3d3d0b !important; }
+.bg-psychic { background-color: #3b1432 !important; }
+.bg-ice { background-color: #1a3c40 !important; }
+.bg-dragon { background-color: #241a45 !important; }
+.bg-dark { background-color: #111111 !important; }
+.bg-fairy { background-color: #3d1a2b !important; }
+.bg-normal { background-color: #2a2a2a !important; }
+.bg-fighting { background-color: #361616 !important; }
+.bg-flying { background-color: #1d2538 !important; }
+.bg-poison { background-color: #2a1136 !important; }
+.bg-ground { background-color: #362811 !important; }
+.bg-rock { background-color: #2e2617 !important; }
+.bg-bug { background-color: #222e11 !important; }
+.bg-ghost { background-color: #1c1430 !important; }
+.bg-steel { background-color: #20262b !important; }
+
+/* =========================================
+   NAVBAR & TÍTULOS
+========================================= */
+.davinci-navbar {
+  background: rgba(20, 20, 20, 0.6); backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(0, 255, 255, 0.2); width: 90%;
+  max-width: 1200px; border-radius: 30px; padding: 10px 20px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+.davinci-title {
+  font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: #fff;
+  text-shadow: 0 0 10px rgba(0, 242, 254, 0.8), 0 0 20px rgba(0, 242, 254, 0.4);
+}
+
+.pokeball-spin { animation: spin 4s linear infinite; }
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* =========================================
+   PESQUISA E PAGINAÇÃO
+========================================= */
+.search-input {
+  background: rgba(20, 20, 20, 0.7); border: 1px solid rgba(0, 255, 255, 0.3);
+  color: white; border-radius: 30px; padding: 15px 25px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: all 0.3s ease;
+}
+.search-input:focus {
+  background: rgba(30, 30, 30, 0.9); border-color: #00f2fe;
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.4); color: white; outline: none;
+}
+.search-input::placeholder { color: rgba(255, 255, 255, 0.5); }
+
+.pagination-bar {
+  background: rgba(20, 20, 20, 0.5); backdrop-filter: blur(10px);
+  border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-neon {
+  background: transparent; color: #00f2fe; border: 1px solid #00f2fe;
+  border-radius: 20px; padding: 8px 20px; text-transform: uppercase;
+  font-weight: bold; transition: all 0.3s ease;
+}
+.btn-neon:hover:not(:disabled) { background: #00f2fe; color: #000; box-shadow: 0 0 15px #00f2fe; }
+.btn-neon:disabled { border-color: #555; color: #555; cursor: not-allowed; }
+
+/* =========================================
+   DOCA DA EQUIPA
+========================================= */
+.team-container {
+  background: rgba(20, 20, 20, 0.6); backdrop-filter: blur(15px);
+  border-radius: 25px; border: 1px solid rgba(0, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5); min-height: 200px;
+}
+
+.team-member-card {
+  background: linear-gradient(145deg, rgba(40, 40, 40, 0.8), rgba(20, 20, 20, 0.9));
+  border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50%;
+  width: 100px; height: 100px; display: flex; justify-content: center; align-items: center;
+  position: relative; cursor: grab; transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.team-member-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 255, 255, 0.3); border-color: rgba(0, 255, 255, 0.5); }
+.team-member-card:active { cursor: grabbing; }
+
+.team-member-img { width: 60px; height: 60px; object-fit: contain; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5)); }
+
+.team-member-name {
+  position: absolute; bottom: -25px; font-size: 0.8rem; color: white;
+  font-weight: bold; text-transform: capitalize; text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+  white-space: nowrap;
+}
+
+.remove-team-btn {
+  position: absolute; top: 0; right: 0; background: rgba(255, 0, 85, 0.8); color: white;
+  border: none; border-radius: 50%; width: 24px; height: 24px; font-size: 14px;
+  display: flex; justify-content: center; align-items: center; cursor: pointer;
+  opacity: 0; transition: opacity 0.3s ease, transform 0.2s ease;
+}
+.team-member-card:hover .remove-team-btn { opacity: 1; }
+.remove-team-btn:hover { background: #ff0055; transform: scale(1.2); }
+
+/* =========================================
+   TABS DAS EQUIPAS MÚLTIPLAS
+========================================= */
+.team-tab-btn {
+  background: rgba(40, 40, 40, 0.8); border: 1px solid rgba(0, 255, 255, 0.3);
+  color: #ffffff !important; border-radius: 20px; padding: 8px 20px;
+  position: relative; transition: all 0.3s ease;
+}
+.team-tab-btn.active {
+  background: rgba(0, 242, 254, 0.2); border-color: #00f2fe;
+  color: #00f2fe !important; box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+}
+.team-tab-btn:hover:not(.active) { background: rgba(0, 242, 254, 0.1); color: #00f2fe !important; }
+
+.delete-team-badge {
+  display: inline-block; margin-left: 8px; background: rgba(255, 0, 85, 0.3);
+  color: #ff0055; border-radius: 50%; width: 20px; height: 20px;
+  line-height: 18px; text-align: center; cursor: pointer;
+}
+.delete-team-badge:hover { background: #ff0055; color: white; }
+
+.add-team-btn {
+  background: transparent; border: 1px dashed rgba(255, 255, 255, 0.5);
+  color: #ffffff !important; border-radius: 20px; padding: 8px 15px;
+}
+.add-team-btn:hover { border-color: #00f2fe; color: #00f2fe !important; }
+
+/* =========================================
+   ESTILOS DRAG & DROP (CDK)
+========================================= */
+.cdk-drag-preview {
+  box-shadow: 0 5px 25px rgba(0, 255, 255, 0.8); border-radius: 50%;
+  background: rgba(20, 20, 20, 0.9); display: flex; justify-content: center;
+  align-items: center; z-index: 1000 !important;
+}
+.team-placeholder {
+  background: rgba(255, 255, 255, 0.05); border: 2px dashed rgba(0, 255, 255, 0.3);
+  border-radius: 50%; width: 100px; height: 100px;
+}
+.cdk-drag-animating { transition: transform 250ms cubic-bezier(0, 0, 0.2, 1); }
+.cdk-drop-list-dragging .team-member-card:not(.cdk-drag-placeholder) { transition: transform 250ms cubic-bezier(0, 0, 0.2, 1); }
+
+/* =========================================
+   JANELA MODAL (STATS) - NOVO
+========================================= */
+.custom-modal-overlay {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px);
+  display: flex; justify-content: center; align-items: center; z-index: 9999;
+}
+.custom-modal-content {
+  background: linear-gradient(145deg, rgba(30, 30, 30, 0.9), rgba(10, 10, 10, 0.95));
+  border: 1px solid rgba(0, 255, 255, 0.3); border-radius: 20px;
+  padding: 30px; width: 90%; max-width: 400px; position: relative;
+  box-shadow: 0 0 30px rgba(0, 242, 254, 0.2);
+  animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes modalPop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+.close-modal-btn {
+  position: absolute; top: 15px; right: 15px; background: transparent;
+  border: none; color: white; font-size: 1.5rem; cursor: pointer; transition: color 0.3s ease;
+}
+.close-modal-btn:hover { color: #ff0055; }

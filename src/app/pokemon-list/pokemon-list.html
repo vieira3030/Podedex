@@ -1,0 +1,104 @@
+<div [className]="'master-wrapper ' + hoveredType">
+
+  <nav class="navbar fixed-top davinci-navbar mx-auto mt-4">
+    <div class="container justify-content-center">
+      <a class="navbar-brand d-flex align-items-center m-0" href="#">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Pok%C3%A9_Ball_icon.svg" alt="Logo" width="50" height="50" class="me-3 pokeball-spin">
+        <span class="davinci-title">Pokédex Masterpiece</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="container main-content" (mouseleave)="onLeave()">
+    
+    <div class="team-container mb-5 p-4">
+      <div class="d-flex justify-content-center flex-wrap gap-2 mb-4">
+        @for (team of allTeams(); track team.id) {
+          <button class="btn team-tab-btn" [class.active]="team.id === activeTeamId()" (click)="switchTeam(team.id)">
+            {{ team.name }} ({{ team.pokemons.length }}/6)
+            @if (allTeams().length > 1) {
+              <span class="delete-team-badge" (click)="deleteTeam(team.id, $event)" title="Apagar Equipa">&times;</span>
+            }
+          </button>
+        }
+        <button class="btn add-team-btn" (click)="createNewTeam()" title="Criar Nova Equipa">+ Nova Equipa</button>
+      </div>
+
+      @if (myTeam.length > 0) {
+        <div class="d-flex justify-content-center gap-4 flex-wrap" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
+          @for (member of myTeam; track member.id) {
+            <div class="team-member-card" cdkDrag>
+              <button class="remove-team-btn" (click)="removeFromTeam(member.id, $event)">&times;</button>
+              <img [src]="member.animatedImage" class="team-member-img" alt="{{ member.name }}">
+              <span class="team-member-name">{{ member.name }}</span>
+              <div *cdkDragPlaceholder class="team-placeholder"></div>
+            </div>
+          }
+        </div>
+      } @else {
+        <div class="text-center text-white-50 mt-3">
+          <p>A tua equipa atual está vazia. Clica no ➕ de um Pokémon para o capturar!</p>
+        </div>
+      }
+    </div>
+
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-8 col-lg-6 position-relative">
+        <input type="text" class="form-control form-control-lg search-input" placeholder="Procurar Pokémon pelo nome..." [(ngModel)]="searchTerm" (ngModelChange)="filterList()">
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-5 p-3 pagination-bar">
+      <button class="btn btn-neon" (click)="previousPage()" [disabled]="offset === 0 || isLoading">&laquo; Recuar</button>
+      <span class="text-white fw-bold fs-5 tracking-widest">Página {{ (offset / limit) + 1 }}</span>
+      <button class="btn btn-neon" (click)="nextPage()" [disabled]="isLoading">Avançar &raquo;</button>
+    </div>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
+      @for (pokemon of displayedPokemons; track pokemon.id) {
+        <div class="col">
+          <!-- NOVO: (infoClicked) adicionado aqui -->
+          <app-pokemon-card 
+            [pokemon]="pokemon" 
+            [isInTeam]="isPokemonInTeam(pokemon.id)"
+            (addClicked)="addToTeam(pokemon, $event)"
+            (removeClicked)="removePokemon(pokemon.id, $event)"
+            (hoverCard)="onHover(pokemon)"
+            (infoClicked)="openModal(pokemon)">
+          </app-pokemon-card>
+        </div>
+      }
+    </div>
+
+  </div>
+
+  <!-- NOVO: JANELA MODAL DE STATS -->
+  @if (selectedPokemon) {
+    <div class="custom-modal-overlay" (click)="closeModal()">
+      <div class="custom-modal-content" (click)="$event.stopPropagation()">
+        <button class="close-modal-btn" (click)="closeModal()">&times;</button>
+        
+        <h2 class="text-capitalize text-center text-white mb-3">{{ selectedPokemon.name }}</h2>
+        <div class="text-center mb-4">
+          <img [src]="selectedPokemon.animatedImage" alt="Animado" style="width: 100px; filter: drop-shadow(0 0 10px #00f2fe);">
+        </div>
+
+        <div class="stats-container">
+          @for (stat of selectedPokemon.stats; track stat.name) {
+            <div class="d-flex align-items-center mb-3">
+              <span class="text-uppercase text-white-50" style="width: 120px; font-size: 0.8rem;">{{ stat.name }}</span>
+              <div class="flex-grow-1 mx-3" style="background: rgba(255,255,255,0.1); height: 10px; border-radius: 5px; overflow: hidden;">
+                <div 
+                  style="height: 100%; transition: width 1s ease;"
+                  [style.width.%]="(stat.value / 200) * 100"
+                  [style.background]="stat.value > 80 ? '#00f2fe' : (stat.value > 50 ? '#ffcc00' : '#ff0055')">
+                </div>
+              </div>
+              <span class="text-white fw-bold" style="width: 30px; text-align: right;">{{ stat.value }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  }
+</div>

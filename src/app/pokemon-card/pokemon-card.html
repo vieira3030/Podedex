@@ -1,0 +1,29 @@
+<div class="pokemon-card" (mouseenter)="hoverCard.emit()">
+  
+  <button class="remove-btn" (click)="removeClicked.emit($event)" title="Esconder Pokémon">
+    &times;
+  </button>
+
+  <button 
+    class="capture-btn" 
+    [class.disabled-btn]="isInTeam"
+    [disabled]="isInTeam"
+    (click)="addClicked.emit($event)" 
+    [title]="isInTeam ? 'Já está na equipa' : 'Adicionar à Equipa'">
+    {{ isInTeam ? '✔️' : '➕' }}
+  </button>
+
+  <!-- NOVO: Botão de Ver Stats -->
+  <button class="info-btn" (click)="infoClicked.emit($event)" title="Ver Estatísticas">
+    📊
+  </button>
+
+  <span class="id-badge">#{{ pokemon.id }}</span>
+  
+  <div class="image-container">
+    <img [src]="pokemon.image" class="pokemon-image static-img" alt="{{ pokemon.name }}">
+    <img [src]="pokemon.animatedImage" class="pokemon-image animated-img" alt="{{ pokemon.name }} animado">
+  </div>
+  
+  <h3 class="pokemon-name text-capitalize">{{ pokemon.name }}</h3>
+</div>
