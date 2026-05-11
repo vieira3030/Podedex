@@ -2,7 +2,7 @@ name: Deploy Pages
 
 on:
   push:
-    branches: ["main", "dev", "aula-5"] // Deploy on push to main, dev, and aula-5 branches
+    branches: ["main", "dev", "aula-5"]
   workflow_dispatch:
 
 permissions:
@@ -31,7 +31,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build -- --configuration production --base-href "/pokedex-app/"
+        run: npm run build -- --configuration production --base-href "/Podedex/"
 
       - name: SPA fallback
         run: cp dist/pokedex-app/browser/index.html dist/pokedex-app/browser/404.html
